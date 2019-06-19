@@ -1,10 +1,9 @@
-package com.tasneem.poftakehome.feat;
+package com.tasneem.poftakehome.feat.ui.main.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tasneem.poftakehome.R;
-import com.tasneem.poftakehome.feat.ui.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 

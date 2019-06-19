@@ -8,6 +8,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Common retrofit callback, you can add retry mechanism going ahead.
+ * @param <T>
+ */
 abstract public class POFCallback<T> implements Callback<T> {
 
     abstract void onFailure(@NonNull ErrorModel errorModel);

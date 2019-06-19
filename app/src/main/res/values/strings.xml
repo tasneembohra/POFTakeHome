@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">POFTakeHome</string>
+    <string name="network_error_description">Seems like something is not working as expected.</string>
+    <string name="network_error_title">Network Error</string>
+    <string name="netwrok_error_retry">Retry</string>
 </resources>

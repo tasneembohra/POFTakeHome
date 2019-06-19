@@ -25,12 +25,14 @@ public class Repository {
        RepositoryComponent repositoryComponent = DaggerRepositoryComponent.builder()
                 .apiModule(new ApiModule())
                 .build();
-        repositoryComponent.inject(this);
+       repositoryComponent.inject(this);
     }
 
     public MutableLiveData<Resource<ArrayList<CommitDataModel>>> commitLiveData = new MutableLiveData<>();
 
     public void fetchCommits() {
+        if (commitLiveData.getValue() != null && commitLiveData.getValue().data != null && commitLiveData.getValue().data.size() > 0) return;
+
         api.getCommits(new ApiListener<ArrayList<CommitDataModel>>() {
             @Override
             public void onError(@NonNull ErrorModel error) {
