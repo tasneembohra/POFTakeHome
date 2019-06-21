@@ -1,4 +1,4 @@
-# POFTakeHome
+# Project
 Display commits from github for the specific repository.<br/>
 Project Specifications : [Find here!](https://docs.google.com/document/d/1MFRZszcN7uYrLN223w__WT4iDj-L75Dor_25ZqEZmvI/edit?usp=sharing
 )
