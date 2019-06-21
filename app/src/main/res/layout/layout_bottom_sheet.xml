@@ -1,0 +1,96 @@
+<layout>
+    <data>
+        <variable
+            name="fragment"
+            type="com.tasneem.poftakehome.feat.ui.main.view.DetailsDialogFragment" />
+        <variable
+            name="viewModel"
+            type="com.tasneem.poftakehome.feat.ui.main.viewmodel.CommitItemViewModel" />
+    </data>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_margin"
+        android:fillViewport="true">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/btn_dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{()->fragment.close()}"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/default_margin" />
+
+        <TextView
+            android:id="@+id/tvSHA"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/imageUser"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"
+            android:text="@{viewModel.sha}"
+            android:layout_marginStart="@dimen/default_margin"
+            android:textColor="@color/primaryTextColor"
+            tools:text="sha"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"
+            app:layout_constraintStart_toEndOf="@id/imageUser"
+            app:layout_constraintTop_toBottomOf="@id/tvSHA"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:lines="1"
+            android:text="@{viewModel.date}"
+            android:textColor="@color/primaryTextColor"
+            tools:text="Jan 20, 2019"/>
+
+        <ImageView
+            android:id="@+id/imageUser"
+            android:layout_width="@dimen/list_user_image"
+            android:layout_height="@dimen/list_user_image"
+            android:src="@drawable/shimmer_rectangle"
+            bind:src="@{viewModel.imageUrl}"
+            android:onClick="@{()->fragment.onImageClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@{viewModel.message}"
+            tools:text="@tools:sample/lorem/random"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            app:layout_constraintStart_toEndOf="@+id/imageUser"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/tvMessage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageUser"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{viewModel.name}"
+            android:gravity="center"
+            tools:text="carlos"/>
+
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

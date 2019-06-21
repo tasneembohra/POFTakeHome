@@ -3,8 +3,10 @@ package com.tasneem.poftakehome.dependencies.modules;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tasneem.poftakehome.BuildConfig;
+import com.tasneem.poftakehome.repo.model.POFDate;
 import com.tasneem.poftakehome.repo.network.ApiInterface;
 import com.tasneem.poftakehome.repo.network.ApiManager;
+import com.tasneem.poftakehome.repo.network.DateDeserializer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -45,8 +47,16 @@ public class ApiModule {
 
     @Provides
     @Singleton
-     public Gson providesGson() {
-        return new GsonBuilder().create();
+    public DateDeserializer providesImageDeserializer() {
+        return new DateDeserializer();
+    }
+
+    @Provides
+    @Singleton
+     public Gson providesGson(DateDeserializer dateDeserializer) {
+        return new GsonBuilder()
+                .registerTypeAdapter(POFDate.class, dateDeserializer)
+                .create();
     }
 
     @Provides

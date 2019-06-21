@@ -11,13 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.tasneem.poftakehome.BR;
 import com.tasneem.poftakehome.R;
 import com.tasneem.poftakehome.databinding.MainFragmentBinding;
-import com.tasneem.poftakehome.feat.ui.main.viewModel.CommitItemViewModel;
-import com.tasneem.poftakehome.feat.ui.main.viewModel.MainViewModel;
+import com.tasneem.poftakehome.feat.ui.main.viewmodel.CommitItemViewModel;
+import com.tasneem.poftakehome.feat.ui.main.viewmodel.MainViewModel;
 import com.tasneem.poftakehome.feat.util.recyclerview.EasyRecyclerAdapter;
 import com.tasneem.poftakehome.feat.util.recyclerview.MapData;
 
@@ -40,10 +39,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        if (getActivity() == null) return null;
+        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         mBinding.setFragment(this);
         mBinding.setViewModel(mViewModel);
-        mBinding.setLifecycleOwner(this);
+
         return mBinding.getRoot();
     }
 
@@ -55,6 +55,14 @@ public class MainFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Void aVoid) {
                 // Do Nothing
+            }
+        });
+        mViewModel.selectedItem.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer position) {
+                if (position == null ) return;
+                DetailsDialogFragment.show(getFragmentManager(), position);
+                mViewModel.selectedItem.setValue(null);
             }
         });
         mViewModel.loadData();

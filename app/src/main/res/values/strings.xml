@@ -3,4 +3,5 @@
     <string name="network_error_description">Seems like something is not working as expected.</string>
     <string name="network_error_title">Network Error</string>
     <string name="netwrok_error_retry">Retry</string>
+    <string name="empty_screen_message">Repository is empty. Time for a little meditation perhaps?</string>
 </resources>

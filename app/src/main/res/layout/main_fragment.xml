@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View" />
@@ -11,7 +12,9 @@
 
         <variable
             name="viewModel"
-            type="com.tasneem.poftakehome.feat.ui.main.viewModel.MainViewModel" />
+            type="com.tasneem.poftakehome.feat.ui.main.viewmodel.MainViewModel" />
+
+
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -22,24 +25,24 @@
         <include
             android:layout_width="0dp"
             android:layout_height="0dp"
-            layout="@layout/layout_error"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:onTryAgain="@{ ()-> viewModel.loadData() }"
-            android:visibility="@{viewModel.isError ? View.VISIBLE : View.GONE, default=gone}"/>
+            bind:retry="@{()->viewModel.loadData()}"
+            android:visibility="@{viewModel.showErrorSrc ? View.VISIBLE : View.GONE, default=gone}"
+            layout="@layout/layout_error"/>
 
         <!-- Empty View -->
         <include
             android:layout_width="0dp"
             android:layout_height="0dp"
-            layout="@layout/layout_empty_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE, default=gone}"/>
+            android:visibility="@{viewModel.showEmptyScr ? View.VISIBLE : View.GONE, default=gone}"
+            layout="@layout/layout_empty"/>
 
         <!-- Shimmer View -->
 
@@ -51,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE, default=gone}"/>
+            android:visibility="@{viewModel.showLoadingScr ? View.VISIBLE : View.GONE, default=visible}"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
@@ -63,7 +66,8 @@
             android:adapter="@{fragment.getAdapter()}"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layoutManager="@{fragment.getLayoutManager()}"/>
+            android:layoutManager="@{fragment.getLayoutManager()}"
+            android:visibility="@{viewModel.showDataScr ? View.VISIBLE : View.GONE, default=gone}"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
